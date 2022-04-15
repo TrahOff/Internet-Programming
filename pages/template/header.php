@@ -16,7 +16,7 @@
 <header>
     <nav class="clearfix">
         <ul class="clearfix">
-            <li><a href="../../index.php">Главная</a></li>
+            <li><a href="../../index.html">Главная</a></li>
             <li><a href="../../pages/resume.php">Резюме</a>
                 <ul>
                     <li><a href="../../pages/resume.php#study">Образование</a></li>
