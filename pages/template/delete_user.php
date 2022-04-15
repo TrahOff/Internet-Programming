@@ -20,7 +20,7 @@
             unlink($old_avatar);
             unset($_SESSION['user']);
             unset($_SESSION['delete']);
-            header('location: ../../index.html');
+            header('location: ../../index.php');
 
         }
         else{
