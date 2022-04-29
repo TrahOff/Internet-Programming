@@ -20,13 +20,26 @@ main a {
     border-radius: 25px;
 }
 
+main div a {
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    background: #FF8450;
+    font-size: 18px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 3%;
+    margin: 5% 0 5%;
+    border: 1px solid black;
+    border-radius: 25px;
+}
+
 main a:hover {
     background: #95857D;
     color: #FF8450;
 }
 
 .gamefield {
-    width: 40%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     margin-top: 2%;
@@ -44,27 +57,22 @@ main li {
 }
 
 main form {
-    width: 100%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-input {
+textarea {
     background: #95857D;
     color: white;
     border: 2px solid black;
-    border-radius: 25px;
     padding: 2%;
+    height: 180px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-input:hover {
-    background-color: #FF8450;
-    color: black;
-}
-
-input::after {
+textarea:hover {
     background-color: #FF8450;
     color: black;
 }
@@ -86,4 +94,87 @@ input::after {
     border-top: 15px solid transparent;
     border-left: 30px solid black;
     cursor: pointer;
+}
+
+table {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 5% 0 5%;
+}
+
+tr {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+td {
+    width: 100%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 24px;
+    margin-bottom: 5%;
+    padding: 2%;
+}
+
+.res {
+    background: #FF8450;
+    color: white;
+}
+
+.red {
+    background: red;
+    color: white;
+}
+
+.green {
+    background: green;
+    color: white;
+}
+
+@media only screen and (min-device-width: 250px) and (max-device-width: 600px) {
+    .gamefield {
+        flex-direction: column;
+    }
+    form {
+        width: 90%;
+        display: flex;
+        align-items: center;
+    }
+    form li {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+    p {
+        font-size: 34px;
+    }
+    main a {
+        font-size: 34px;
+        padding: 2% 0;
+    }
+    main div a {
+        font-size: 40px;
+        padding: 2%;
+    }
+    #result {
+        font-size: 34px;
+    }
+    textarea {
+        height: 700px;
+        width: 94%;
+        font-size: 40px;
+    }
+    .rect {
+        border-bottom: 40px solid transparent;
+        border-top: 40px solid transparent;
+        border-left: 80px solid black;
+        margin: 15% 0 15%;
+    }
+    table {
+        width: 80%;
+    }
+    td {
+        font-size: 40px;
+    }
 }

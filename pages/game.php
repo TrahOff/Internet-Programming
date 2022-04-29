@@ -4,28 +4,34 @@ session_start();
 ?>
 <link href="../style/game.css" type="text/css" rel="stylesheet">
 <main>
-
+<audio id="audio">
+    <source type="audio/wav" src="../audio/game/dictation.wav"/>
+</audio>
+<audio id="bad">
+    <source type="audio/wav" src="../audio/game/badresult.mp3"/>
+</audio>
+<audio id="good">
+    <source type="audio/wav" src="../audio/game/goodresult.mp3"/>
+</audio>
     <?php if (!$_SESSION['Game'] && !$_SESSION['end']) { ?>
         <h2>ИГРА</h2>
         <p>
             Эта игра проверит ваши знания словарных слов.
-            Слева будут расположены кнопки, по нажатии на которые
-            будет воспроизводиться слово, которое вам надо записать.
-            По завершению будут выведены ваши результаты.
+            Слева будет расположена кнопка. Нажмите на неё,
+            и слушая диктант записывайте слова.
+            По завершению будут выведены ваши результаты. УДАЧИ!
         </p>
         <a href="gamePages/GameStatus.php">Начать игру</a>
 
     <?php } if($_SESSION['Game']) { ?>
         <h2><?= $_SESSION['Game'] ?></h2>
         <div class="gamefield" id="gamefield">
-            <form>
-                <?php for($i= 1; $i<= 10; $i++) { ?>
+        <p>Включите запись диктанта и запишите слова. Запись специально искажена, для усложнения задания</p> 
+            <form>        
                 <li>
-                    <div class="number"><?= $i ?></div>
-                    <div class="left"><div class="rect"></div></div>
-                    <div class="right"><div class="input" id="<?= $i ?>"><input type="text" value=""></div></div>
+                    <div class="rect" onclick="play();"></div>
+                    <div class="input"><textarea id="answers"></textarea></div>
                 </li>
-                <?php } ?>
             </form>
             <input id="result" type="button" onclick="result();" value="Завершить"/>
         </div>
