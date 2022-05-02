@@ -26,9 +26,9 @@
             </li>
             <li><a href="../../pages/gallery.php">Галерея</a></li>
             <li><a href="../../pages/works.php">Работы</a></li>
-            <li><a href="../../pages/game.php">Игра</a></li>
             <?php if($_SESSION['user']) {
                 if ($_SESSION['user']['user_name'] != 'TrahOff') { ?>
+                <li><a href="../../pages/game.php">Игра</a></li>
                 <li><a href='../../pages/profile.php'><?= $_SESSION['user']['user_name'] ?></a>
                     <ul>
                         <li><a href="../../pages/template/change_password.php">сменить пароль</a></li>
@@ -38,6 +38,7 @@
                     </ul>
                 </li>
             <?php } else {?>
+                <li><a href="../../pages/game.php">Игра</a></li>
                 <li><a href='../pages/profile.php'><?= $_SESSION['user']['user_name'] ?></a>
                     <ul>
                         <li><a href="../../pages/template/change_password.php">сменить пароль</a></li>

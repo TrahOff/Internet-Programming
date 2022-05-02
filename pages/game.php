@@ -4,15 +4,14 @@ session_start();
 ?>
 <link href="../style/game.css" type="text/css" rel="stylesheet">
 <main>
-<audio id="audio">
-    <source type="audio/wav" src="../audio/game/dictation.wav"/>
-</audio>
+
 <audio id="bad">
-    <source type="audio/wav" src="../audio/game/badresult.mp3"/>
+    <source type="audio/wav" src="../audio/badresult.mp3"/>
 </audio>
 <audio id="good">
-    <source type="audio/wav" src="../audio/game/goodresult.mp3"/>
+    <source type="audio/wav" src="../audio/goodresult.mp3"/>
 </audio>
+
     <?php if (!$_SESSION['Game'] && !$_SESSION['end']) { ?>
         <h2>ИГРА</h2>
         <p>
@@ -24,25 +23,60 @@ session_start();
         <a href="gamePages/GameStatus.php">Начать игру</a>
 
     <?php } if($_SESSION['Game']) { ?>
-        <h2><?= $_SESSION['Game'] ?></h2>
+        <h2><?= $_SESSION['Game']; ?></h2>
         <div class="gamefield" id="gamefield">
-        <p>Включите запись диктанта и запишите слова. Запись специально искажена, для усложнения задания</p> 
-            <form>        
-                <li>
-                    <div class="rect" onclick="play();"></div>
-                    <div class="input"><textarea id="answers"></textarea></div>
-                </li>
+        <?php if ($_SESSION['i'] < 10) { ?>
+        <p>Включайте записи слов и записывайте их в поля</p> 
+            <form class="try"  action="gamePages/nextGamePage.php" method="post" enctype="multipart/form-data">
+                    <audio id="<?= $_SESSION['play'][$_SESSION['i']]['sound_id'] ?>">
+                        <source type="audio/wav" src=" <?= $_SESSION['play'][$_SESSION['i']]['sound_name'] ?> "/>
+                    </audio>
+                    <li>
+                        <div class="num"><?= $_SESSION['i']+1 ?></div>
+                        <div class="rect" onclick="play(<?= $_SESSION['play'][$_SESSION['i']]['sound_id'] ?>);"></div>
+                        <div class="input">
+                            <input type="text" class="in" id= "<?= $_SESSION['play'][$_SESSION['i']]['sound_id'] ?>" name="word">
+                        </div>
+                    </li>
+                    <button type="submit" name="submit">Следующее слово</button>  
             </form>
-            <input id="result" type="button" onclick="result();" value="Завершить"/>
-        </div>
-        <script src="../scripts/game.js"></script> 
+        <?php } else { ?>
+            <p>Игра завершена</p>
+            <a href="gamePages/EndGame.php" onclick="resaudio(<?= $_SESSION['wrong'] ?>, <?= $_SESSION['correct'] ?>);">
+                подвести итоги игры
+            </a>
+        <?php } ?>  
+        </div> 
 
     <?php } if($_SESSION['end']) { ?>
         <h2><?= $_SESSION['end'] ?></h2>
-        <p>Надеюсь, вам понравилось проходить нашу игру =)</p>
+        <p>Надеюсь, вам понравилось проходить нашу игру =). Вот ваши результаты.</p>
+        <div class="results">
+            <?php for ($i = 0; $i < 10; $i++) {
+                if (!empty($_SESSION['word'][$i])) { ?> 
+                    <div class="<?= $_SESSION['class'][$i] ?>"><?= $_SESSION['word'][$i] ?></div>
+                <?php } else { ?>
+                    <div class="false">——————</div>
+                <?php } ?>
+            <?php } ?>
+        </div>
         <a href="gamePages/restart.php">Покинуть игру</a>
-        
+        <?php if($_SESSION['wrong'] >= $_SESSION['correct']) { ?>
+                <script>
+                    let audio = document.getElementById("bad");
+                    audio.play();
+                    audio.volume = 0.5;
+                </script>
+            <?php } else { ?>
+                <script>
+                    let audio = document.getElementById("good");
+                    audio.play();
+                    audio.volume = 0.5;
+                </script>
+            <?php } ?>
     <?php } ?>
-
+    
+    <script src="../scripts/game.js"></script>
+    
 </main>
 <?php include "../pages/template/footer.php"?>
