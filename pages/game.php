@@ -5,13 +5,6 @@ session_start();
 <link href="../style/game.css" type="text/css" rel="stylesheet">
 <main>
 
-<audio id="bad">
-    <source type="audio/wav" src="../audio/badresult.mp3"/>
-</audio>
-<audio id="good">
-    <source type="audio/wav" src="../audio/goodresult.mp3"/>
-</audio>
-
     <?php if (!$_SESSION['Game'] && !$_SESSION['end']) { ?>
         <h2>ИГРА</h2>
         <p>
@@ -62,12 +55,18 @@ session_start();
         </div>
         <a href="gamePages/restart.php">Покинуть игру</a>
         <?php if($_SESSION['wrong'] >= $_SESSION['correct']) { ?>
+            <audio id="bad">
+                <source type="audio/wav" src="../audio/badresult.mp3"/>
+            </audio>
                 <script>
                     let audio = document.getElementById("bad");
                     audio.play();
                     audio.volume = 0.5;
                 </script>
             <?php } else { ?>
+                <audio id="good">
+                    <source type="audio/wav" src="../audio/goodresult.mp3"/>
+                </audio>
                 <script>
                     let audio = document.getElementById("good");
                     audio.play();
